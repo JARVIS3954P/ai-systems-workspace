@@ -6,7 +6,7 @@
 let score = 33
 console.log(typeof score); // Output: number
 
-valueInScore= Number(score)
+let valueInScore = Number(score)
 console.log(typeof valueInScore); // Output: number
 /*
 The Number() function is used to convert the value of score to a number.
@@ -17,7 +17,7 @@ The typeof operator confirms that valueInScore is of type number.
 score = "33abc"
 console.log(typeof score); // Output: string
 
-valueInScore= Number(score)
+valueInScore = Number(score)
 console.log(typeof valueInScore); // Output: number
 console.log(valueInScore); // Output: NaN
 /*
@@ -29,19 +29,28 @@ The typeof operator confirms that valueInScore is of type number, even though it
 score = null
 console.log(typeof score); // Output: object
 
-valueInScore= Number(score)
+valueInScore = Number(score)
 console.log(typeof valueInScore); // Output: number
 console.log(valueInScore); // Output: 0
 /*
-The Number() function attempts to convert the string "Null" to a number.
-Since the string does not represent a valid number, the conversion fails and results in NaN (Not-a-Number).
-The typeof operator confirms that valueInScore is of type number, even though it holds the value NaN.
+The Number() function converts null to a number.
+
+In JavaScript, null is explicitly converted to 0.
+
+Therefore:
+Number(null) // 0
+
+The conversion succeeds and returns 0.
+
+Note:
+typeof null returns "object".
+This is a historical bug in JavaScript that has been preserved for backward compatibility.
 */
 
 score = undefined
 console.log(typeof score); // Output: undefined
 
-valueInScore= Number(score)
+valueInScore = Number(score)
 console.log(typeof valueInScore); // Output: number
 console.log(valueInScore); // Output: NaN
 /*
@@ -53,7 +62,7 @@ The typeof operator confirms that valueInScore is of type number, even though it
 score = true
 console.log(typeof score); // Output: boolean
 
-valueInScore= Number(score)
+valueInScore = Number(score)
 console.log(typeof valueInScore); // Output: number
 console.log(valueInScore); // Output: 1
 /*
@@ -66,10 +75,20 @@ The typeof operator confirms that valueInScore is of type number, and its value 
 33 -> 33
 "33" -> 33
 "33abc" -> NaN
+"" -> 0
+" " -> 0
 null -> 0
 undefined -> NaN
 true -> 1
 false -> 0
+
+Additional Examples:
+Number([]) -> 0
+Number([1]) -> 1
+Number([1,2]) -> NaN
+
+parseInt("33abc") -> 33
+Number("33abc") -> NaN
 */
 
 // Boolean Conversion
@@ -95,6 +114,10 @@ The typeof operator confirms that booleanIsLoggedIn is of type boolean, and its 
 null -> false
 undefined -> false
 NaN -> false
+
+Additional Examples:
+[] -> true
+{} -> true
 */
 
 // String Conversion
@@ -138,21 +161,37 @@ console.log("10" * 2); // Output: 20
 console.log("20" / 4); // Output: 5
 console.log("10" % 3); // Output: 1
 console.log("2" ** 3); // Output: 8
+
 /*
-In JavaScript, when performing operations between different data types, type coercion occurs.
-When using the + operator with a string and a number, JavaScript converts the number to a string and concatenates them.
-For example, 3 + "4" results in "34" because 3 is converted to "3" and then concatenated with "4".
-Similarly, "5" + 2 results in "52" because 2 is converted to "2" and then concatenated with "5".
+In JavaScript, when performing operations between different data types,
+type coercion may occur.
 
-However, when using other arithmetic operators like -, *, /, %, and ** with a string and a number,
- JavaScript attempts to convert the string to a number.
-For example, "5" - 2 results in 3 because "5" is converted to the number 5 before the subtraction operation.
-Similarly, "10" * 2 results in 20 because "10" is converted to the number 10 before the multiplication operation.
+When using the + operator with a string and a number,
+JavaScript converts the number to a string and performs concatenation.
 
-It is so because JavaScript follows specific rules for type coercion,
- and the behavior can vary based on the operator used and the types of operands involved.
+Examples:
+3 + "4" -> "34"
+"5" + 2 -> "52"
+"1" + 2 + 3 -> "123"
+
+Evaluation occurs from left to right.
+
+Example:
+1 + 2 + "3"
+=> 3 + "3"
+=> "33"
+
+For arithmetic operators such as -, *, /, %, and **,
+JavaScript performs numeric coercion.
+
+Examples:
+"5" - 2 -> 3
+"10" * 2 -> 20
+"20" / 4 -> 5
+"2" ** 3 -> 8
+
+The operands are converted to numbers before the operation is performed.
+
+JavaScript follows specific coercion rules,
+and the behavior varies depending on the operator and operand types involved.
 */
-
-
-
-
