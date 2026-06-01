@@ -17,6 +17,7 @@ rl.question("Enter your name: ", (name) => {
 });
 
 function returnInitials(name) {
-    let nameParts = name.split(" ");
-    return nameParts[0];
+    return name.split(" ")
+               .map(part => part[0].toUpperCase())
+               .join(".");
 }
