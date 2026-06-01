@@ -30,7 +30,6 @@ console.log(Array.from("Jarvis")) // Output: [ 'J', 'a', 'r', 'v', 'i', 's' ]
 
 //Interesting Case
 console.log(Array.from({ name : "Jarvis" })) // Output: [] because the object doesn't have a length property, so it can't be converted to an array.
-c
 
 //Using Array.of() to create an array from a list of arguments
 const hero1 = "Iron Man"
