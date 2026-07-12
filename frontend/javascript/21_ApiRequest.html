@@ -72,25 +72,43 @@
     </article>
 </body>
 <script>
-    const requestUrl = "https://api.restful-api.dev/objects";
-
+    const requestUrl = 'https://api.restful-api.dev/objects/7'
     const xhr = new XMLHttpRequest();
+    xhr.open('GET', requestUrl)
+    xhr.onload = function(){
+            const data = JSON.parse(this.responseText)
+            const originalTitle = data.name;
+            const originalDescription = data.data["CPU model"];
+            let detailsVisible = false;
 
-    xhr.open("GET", requestUrl);
+            document.querySelector("button").addEventListener("click", function () {
 
-    xhr.onreadystatechange = function () {
+                if (!detailsVisible) {
+                    document.getElementById("card-title").textContent = originalTitle;
 
-        if (xhr.readyState === 4) {
+                    document.getElementById("card-description").innerHTML = `
+                        Year: ${data.data.year}<br>
+                        Price: ₹${data.data.price}<br>
+                        CPU: ${data.data["CPU model"]}<br>
+                        Storage: ${data.data["Hard disk size"]}
+                    `;
 
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
-                console.log(data);
-            } else {
-                console.error("Request failed:", xhr.status, xhr.responseText);
-            }
-        }
-    };
+                    this.textContent = "Close Details";
+                    detailsVisible = true;
+                }
+                else {
 
+                    document.getElementById("card-title").textContent = originalTitle;
+
+                    document.getElementById("card-description").textContent = originalDescription;
+
+                    this.textContent = "View Details";
+
+                    detailsVisible = false;
+                }
+
+            });
+    }
     xhr.send();
 </script>
 </html>
